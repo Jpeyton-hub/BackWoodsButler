@@ -8,6 +8,7 @@ const eventSchema = new Schema({
     clientID: ObjectId,
     equipment: Array,
     duration: Number,
+    location: String,
     completed: { Type : Boolean, default: false}
 });
 
