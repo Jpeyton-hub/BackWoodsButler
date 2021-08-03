@@ -5,8 +5,7 @@ const {
   GraphQLID,
   GraphQLObjectType,
   GraphQLSchema,
-  GraphQLString,
-  GraphQLNonNull,
+  GraphQLString
 } = require("graphql");
 const Client = require('./clients');
 const Equipment = require('./equipment');
@@ -15,37 +14,37 @@ const Event = require('./events');
 const ClientType = new GraphQLObjectType({
     name: "Client",
     fields: () => ({
-        id : GraphQLID,
-        firstName : GraphQLString,
-        lastName : GraphQLString,
-        email : GraphQLString,
-        phone : GraphQLInt,
-        notes : GraphQLString
+        id : {type : GraphQLID},
+        firstName : { type : GraphQLString},
+        lastName : {type : GraphQLString},
+        email : {type : GraphQLString},
+        phone : {type : GraphQLInt},
+        notes : {type : GraphQLString}
     })
 });
 
 const EventType = new GraphQLObjectType({
     name: "Event",
     fields: () => ({
-        id : GraphQLID,
-        title : GraphQLString,
-        date : GraphQLString,
-        clientID : GraphQLID,
-        equipment : new GraphQLList(EquipmentType),
-        duration : GraphQLInt,
-        location : GraphQLString,
-        completed : GraphQLBoolean
+        id : { type : GraphQLID },
+        title : { type : GraphQLString },
+        date : { type : GraphQLString },
+        clientID : { type : GraphQLID },
+        equipment : { type : new GraphQLList(EquipmentType) },
+        duration : { type : GraphQLInt },
+        location : { type : GraphQLString },
+        completed : { type : GraphQLBoolean }
     })
 });
 
 const EquipmentType = new GraphQLObjectType({
     name: "Equipment",
     fields: () => ({
-        id : GraphQLID,
-        title : GraphQLString,
-        type : GraphQLString,
-        qty : GraphQLInt,
-        notes : GraphQLString
+        id : { type : GraphQLID },
+        title : { type : GraphQLString },
+        type : { type : GraphQLString },
+        qty : { type : GraphQLInt },
+        notes : { type : GraphQLString },
     })
 });
 
