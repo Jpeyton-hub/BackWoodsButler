@@ -1,4 +1,4 @@
-const {
+const {  
   GraphQLBoolean,
   GraphQLList,
   GraphQLInt,
@@ -24,6 +24,31 @@ const ClientType = new GraphQLObjectType({
     })
 });
 
+const EventType = new GraphQLObjectType({
+    name: "Event",
+    fields: () => ({
+        id : GraphQLID,
+        title : GraphQLString,
+        date : GraphQLString,
+        clientID : GraphQLID,
+        equipment : new GraphQLList(EquipmentType),
+        duration : GraphQLInt,
+        location : GraphQLString,
+        completed : GraphQLBoolean
+    })
+});
+
+const EquipmentType = new GraphQLObjectType({
+    name: "Equipment",
+    fields: () => ({
+        id : GraphQLID,
+        title : GraphQLString,
+        type : GraphQLString,
+        qty : GraphQLInt,
+        notes : GraphQLString
+    })
+});
+
 const RootQuery = new GraphQLObjectType({
     name : "RootQueryType",
     fields : {
@@ -32,6 +57,20 @@ const RootQuery = new GraphQLObjectType({
             args : { id : { type : GraphQLID } },
             resolve(parent, args){
                 return Client.findById(args.id)
+            }
+        },
+        event : {
+            type : EventType,
+            args : { id : { type : GraphQLID } },
+            resolve(parent, args){
+                return Event.findById(args.id)
+            }
+        },
+        equipment : {
+            type : EquipmentType,
+            args : { id : { type : GraphQLID } },
+            resolve(parent, args){
+                return Equipment.findById(args.id)
             }
         }
     }
