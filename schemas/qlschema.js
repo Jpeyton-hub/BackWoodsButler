@@ -29,7 +29,11 @@ const EventType = new GraphQLObjectType({
         id : { type : GraphQLID },
         title : { type : GraphQLString },
         date : { type : GraphQLString },
-        clientID : { type : GraphQLID },
+        client : { type : ClientType,
+                    resolve(parent, args){
+                        return Client.findById(parent.clientID)
+                    } 
+                },
         equipment : { type : new GraphQLList(EquipmentType) },
         duration : { type : GraphQLInt },
         location : { type : GraphQLString },
